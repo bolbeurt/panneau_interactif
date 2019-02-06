@@ -1,0 +1,62 @@
+{% extends 'Layout/layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Home
+{% endblock %}
+
+{% block content %}
+
+        <h1 class="fs20px">Ajoutez un bien</h1>
+<div class="dFlex flexDC fs15px">
+    <form method="POST" action="">
+        <div>Type</div>
+            <select name="type">
+                <option value="">Type de bien</option>
+                {% for type in type %}
+                    <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+            </select>
+        <div>
+            Nombre de pièces
+        </div>
+            <input type="number" name="nb_pieces">
+        <div>
+            Surface (m²)
+        </div>
+            <input type="number" name="surface">
+        <div>
+            Prix
+        </div>
+            <input type="number" name="prix">
+        <div>
+            Ville
+        </div>
+            <input type="text" name="ville">
+        <div>
+            Description
+        </div>
+            <input type="text" name="description">
+        <div>
+            Performance énergetique
+        </div>
+            <input type="number" name="perf_nrj">
+        <div>
+            Gaz à Effets de Serre (GES)
+        </div>
+            <input type="number" name="ges">
+        <div>
+            Adresse
+        </div>
+            <input type="text" name="adresse">
+        <div>
+            Prestation
+        </div>        
+            <select name="prestation">
+                <option value="vente">à vendre</option>
+                <option value="location">à louer</option>
+            </select>
+        <?php include '/assets/phpqrcode'?>
+        	<input type="submit" name="valider" value="Valider">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+@import 'reset.css';
+
+.dFlex {display: flex;}
+.flexDC {flex-direction: column;}
+
+.fs20px {font-size: 20px;}
+.fs15px {font-size: 15px;}
