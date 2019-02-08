@@ -50,12 +50,16 @@
             <input type="text" name="adresse">
         <div>
             Prestation
-        </div>        
+        </div> 
+
             <select name="prestation">
                 <option value="vente">à vendre</option>
                 <option value="location">à louer</option>
             </select>
-        <?php include '/assets/phpqrcode'?>
+
+            <input type="text" name="flashcode" value="{{ flashcode }}" style="display:none;">   
+
+
         	<input type="submit" name="valider" value="Valider">
     </form>
 </div>

@@ -26,7 +26,8 @@ class biens extends Model {
             $ville = $_POST['ville']; 
             $description = $_POST['description'];
             $perf_nrj = $_POST['perf_nrj']; 
-            $ges = $_POST['ges'];     
+            $ges = $_POST['ges'];
+            $flashcode = $_POST['flashcode'];
             $adresse = $_POST['adresse'];
             $prestation = $_POST['prestation'];
 
@@ -50,8 +51,36 @@ class biens extends Model {
         $requete->execute();
 
         return true;
+
+        $errorCorrectionLevel = 'L';
+        $matrixPointSize = 10;
+
+
+        $dir="Data/Qrcode/".$flashcode;
+        if(!file_exists($dir)){
+            mkdir($dir,0777,true);
+        }
+        $file_name = $dir.$flashcode.".png";
+        Qrcode\QRcode::png($file_name, $errorCorrectionLevel, $matrixPointSize, 2);
+        $logo = "logo.png";
+        $QR = $file_name;
+        if ($logo !== FALSE) {
+            $QR = imagecreatefromstring(file_get_contents($QR));
+            $logo = imagecreatefromstring(file_get_contents($logo));
+            $QR_width = imagesx($QR);
+            $QR_height = imagesy($QR);
+            $logo_width = imagesx($logo);
+            $logo_height = imagesy($logo);
+            $logo_qr_width = $QR_width / 5;
+            $scale = $logo_width/$logo_qr_width;
+            $logo_qr_height = $logo_height/$scale;
+            $from_width = ($QR_width - $logo_qr_width) / 2;
+
+            imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,$logo_qr_height, $logo_width, $logo_height);
+        }
     }
 }
+
 
     /* public static function getTypes(){
         $db = Database::getInstance();
