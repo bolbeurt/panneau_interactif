@@ -9,13 +9,16 @@ class PageController extends Controller {
         
 
         $biens = biens::upload($type, $nb_pieces, $surface, $prix, $ville, $description, $perf_nrj, $ges, $adresse, $flashcode, $prestation);
+        $image = biens::createImg($QR);
+
 
 
         $template = $this->twig->loadTemplate('/Page/index.html.twig');
         echo $template->render(array(
             'infosFormSearch'   => $infosFormSearch,
             'type'              => $type,
-            'flashcode'         => $flashcode,       
+            'flashcodename'     => $flashcode,
+            'Qrcode'            => $image,     
 
         ));
     }

@@ -51,7 +51,17 @@ class biens extends Model {
         $requete->execute();
 
         return true;
+    }
+}
 
+    public static function createImg(){
+
+        $db = Database::getInstance();
+
+
+        if(isset($_POST['valider'])){
+
+        $flashcode = $_POST['flashcode'];
         $errorCorrectionLevel = 'L';
         $matrixPointSize = 10;
 
@@ -76,7 +86,9 @@ class biens extends Model {
             $logo_qr_height = $logo_height/$scale;
             $from_width = ($QR_width - $logo_qr_width) / 2;
 
+
             imagecopyresampled($QR, $logo, $from_width, $from_width, 0, 0, $logo_qr_width,$logo_qr_height, $logo_width, $logo_height);
+            }
         }
     }
 }
@@ -100,4 +112,3 @@ class biens extends Model {
         
         return $infosFests;
     }*/
-}
